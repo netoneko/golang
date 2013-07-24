@@ -55,6 +55,8 @@ Vagrant.configure("2") do |config|
     sudo apt-get install golang-stable
     sudo apt-get install -y golang vim git-core
     sudo apt-get install -y mercurial
+
+    sudo go get github.com/hoisie/web
   END
 
 end
