@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
   #   vb.gui = true
   #
   #   # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "256"]
+    vb.customize ["modifyvm", :id, "--memory", "512"]
   end
   #
   # View the documentation for the provider you're using for more
@@ -50,9 +50,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :shell, :inline => <<-END
     sudo apt-get install -y python-software-properties
-    sudo add-apt-repository ppa:gophers/go
+    sudo add-apt-repository ppa:james-page/golang-backports
     sudo apt-get update
-    sudo apt-get install golang-stable
     sudo apt-get install -y golang vim git-core
     sudo apt-get install -y mercurial
 

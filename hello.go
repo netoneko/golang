@@ -2,22 +2,26 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"github.com/hoisie/web"
-	//	"html/template"
 	"io"
 )
 
-func hello(val string) string { return "hello " + val }
-func index(ctx *web.Context) {
+type Response struct {
+	Hello string `json:"hello"`
+}
+
+func hello(ctx *web.Context, val string) {
 	var buf bytes.Buffer
-	buf.WriteString("hello")
+
+	result, _ := json.Marshal(&Response{Hello: val})
+
+	buf.Write(result)
 	//copy buf directly into the HTTP response
 	io.Copy(ctx, &buf)
 }
 
 func main() {
-	web.Get("/", index)
 	web.Get("/(.*)", hello)
-
 	web.Run("0.0.0.0:9999")
 }
